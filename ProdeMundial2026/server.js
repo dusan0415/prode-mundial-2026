@@ -8,7 +8,7 @@ const sqlite3 = require("sqlite3").verbose();
 
 const app = express();
 app.use(express.json());
-app.use(express.static("public"));
+app.use(express.static("Public"));
 
 const db = new sqlite3.Database("prode.db");
 
