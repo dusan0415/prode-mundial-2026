@@ -1,13 +1,10 @@
 {
   "name": "prode-mundial-2026",
   "version": "1.0.0",
-  "description": "Sistema de prode del mundial",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
   },
-  "author": "dusan0415",
-  "license": "ISC",
   "dependencies": {
     "express": "^4.18.2",
     "sqlite3": "^5.1.6",
