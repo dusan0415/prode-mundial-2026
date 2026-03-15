@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Prode Mundial 2026</title>
+</head>
+
+<body>
+
+    <h1>Participantes del Prode</h1>
+
+    <input id="nombre" placeholder="Nombre">
+    <input id="apellido" placeholder="Apellido">
+    <input id="dni" placeholder="DNI">
+    <input id="telefono" placeholder="Telefono">
+
+    <button onclick="agregar()">Agregar participante</button>
+
+    <h2>Lista</h2>
+
+    <ul id="lista"></ul>
+
+    <script>function cargar(){
+
+fetch("/participantes")
+.then(r=>r.json())
+.then(data=>{
+
+let lista=document.getElementById("lista")
+lista.innerHTML=""
+
+data.forEach(p=>{
+
+let li=document.createElement("li")
+li.innerText=p.nombre+" "+p.apellido+" - DNI:"+p.dni
+
+lista.appendChild(li)
+
+})
+
+})
+
+}
+
+function agregar(){
+
+fetch("/participantes",{
+
+method:"POST",
+headers:{
+"Content-Type":"application/json"
+},
+
+body:JSON.stringify({
+
+nombre:document.getElementById("nombre").value,
+apellido:document.getElementById("apellido").value,
+dni:document.getElementById("dni").value,
+telefono:document.getElementById("telefono").value
+
+})
+
+}).then(()=>cargar())
+
+}
+
+cargar()</script>
+
+</body>
+</html>

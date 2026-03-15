@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Cargar Pronósticos</title>
+</head>
+
+<body>
+
+    <h1>Cargar pronósticos</h1>
+
+    <select id="participante"></select>
+
+    <button onclick="guardar()">Guardar todo</button>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Partido</th>
+                <th>Local</th>
+                <th>Empate</th>
+                <th>Visitante</th>
+            </tr>
+        </thead>
+
+        <tbody id="tabla"></tbody>
+
+    </table>
+
+    <script>let partidos=[]
+
+function cargarParticipantes(){
+
+fetch("/participantes")
+.then(r=>r.json())
+.then(data=>{
+
+let select=document.getElementById("participante")
+
+data.forEach(p=>{
+
+let option=document.createElement("option")
+
+option.value=p.id
+option.text=p.nombre+" "+p.apellido
+
+select.appendChild(option)
+
+})
+
+})
+
+}
+
+function cargarPartidos(){
+
+fetch("/partidos")
+.then(r=>r.json())
+.then(data=>{
+
+partidos=data
+
+let tabla=document.getElementById("tabla")
+
+data.forEach(p=>{
+
+let fila=`
+<tr>
+<td>${p.equipo_local} vs ${p.equipo_visitante}</td>
+
+<td><input type="radio" name="p${p.id}" value="local"></td>
+<td><input type="radio" name="p${p.id}" value="empate"></td>
+<td><input type="radio" name="p${p.id}" value="visitante"></td>
+
+</tr>
+`
+
+tabla.innerHTML += fila
+
+})
+
+})
+
+}
+
+        function guardar() {
+
+            let participante = document.getElementById("participante")
+
+            let participante_id = participante.value
+
+            let lista = []
+
+            partidos.forEach(p => {
+
+                let r = document.querySelector(`input[name="p${p.id}"]:checked`)
+
+                if (r) {
+
+                    lista.push({
+                        partido_id: p.id,
+                        pronostico: r.value
+                    })
+
+                }
+
+            })
+
+            fetch("/guardar-pronosticos", {
+
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify({
+
+                    participante_id: participante_id,
+                    pronosticos: lista
+
+                })
+
+            })
+                .then(() => {
+
+                    alert("Pronóstico guardado")
+
+                    limpiar()
+
+                    siguienteParticipante()
+
+                })
+
+        }
+
+        function limpiar() {
+
+            document.querySelectorAll("input[type=radio]").forEach(r => {
+
+                r.checked = false
+
+            })
+
+        }
+
+        function siguienteParticipante() {
+
+            let select = document.getElementById("participante")
+
+            let index = select.selectedIndex
+
+            if (index < select.options.length - 1) {
+
+                select.selectedIndex = index + 1
+
+            }
+
+        }
+
+body:JSON.stringify({
+
+participante_id:participante,
+pronosticos:lista
+
+})
+
+})
+
+.then(()=>alert("Pronósticos guardados"))
+
+}
+
+cargarParticipantes()
+cargarPartidos()</script>
+
+</body>
+</html>

@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <PropertyGroup>
+    <PackageJsonName Condition="$(PackageJsonName) == ''">prodemundial2026</PackageJsonName>
+    <PackageJsonVersion Condition="$(PackageJsonVersion) == ''">1.0.0</PackageJsonVersion>
+    <PackageJsonDescription Condition="$(PackageJsonDescription) == ''"></PackageJsonDescription>
+    <PackageJsonMain Condition="$(PackageJsonMain) == ''">app.js</PackageJsonMain>
+    <PackageJsonScriptsTest Condition="$(PackageJsonScriptsTest) == ''">echo "Error: no test specified" &amp;&amp; exit 1</PackageJsonScriptsTest>
+    <PackageJsonKeywords Condition="$(PackageJsonKeywords) == ''">[]</PackageJsonKeywords>
+    <PackageJsonAuthor Condition="$(PackageJsonAuthor) == ''"></PackageJsonAuthor>
+    <PackageJsonLicense Condition="$(PackageJsonLicense) == ''">ISC</PackageJsonLicense>
+    <PackageJsonType Condition="$(PackageJsonType) == ''">commonjs</PackageJsonType>
+    <PackageJsonDevdependenciesEslint Condition="$(PackageJsonDevdependenciesEslint) == ''">^10.0.3</PackageJsonDevdependenciesEslint>
+    <PackageJsonDependenciesMulter Condition="$(PackageJsonDependenciesMulter) == ''">^2.1.1</PackageJsonDependenciesMulter>
+    <PackageJsonDependenciesXlsx Condition="$(PackageJsonDependenciesXlsx) == ''">^0.18.5</PackageJsonDependenciesXlsx>
+  </PropertyGroup>
+</Project>

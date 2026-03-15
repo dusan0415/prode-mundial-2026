@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Importar participantes</title>
+</head>
+
+<body>
+
+    <h1>Importar participantes desde Excel</h1>
+
+    <input type="file" id="archivo">
+
+    <button onclick="subir()">Importar</button>
+
+    <script>function subir(){
+
+let formData = new FormData()
+
+let archivo = document.getElementById("archivo").files[0]
+
+formData.append("archivo",archivo)
+
+fetch("/importar-participantes",{
+
+method:"POST",
+body:formData
+
+})
+
+.then(r=>r.text())
+.then(t=>alert(t))
+
+}</script>
+
+</body>
+</html>

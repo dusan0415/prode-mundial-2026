@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Ranking</title>
+</head>
+
+<body>
+
+    <h1>Tabla del Prode</h1>
+
+    <button onclick="calcular()">Calcular puntos</button>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Posición</th>
+                <th>Participante</th>
+                <th>Puntos</th>
+            </tr>
+        </thead>
+
+        <tbody id="tabla"></tbody>
+
+    </table>
+
+    <script>function cargar(){
+
+fetch("/ranking")
+.then(r=>r.json())
+.then(data=>{
+
+let tabla=document.getElementById("tabla")
+
+tabla.innerHTML=""
+
+data.forEach((p,i)=>{
+
+let fila=`
+<tr>
+<td>${i+1}</td>
+<td>${p.nombre} ${p.apellido}</td>
+<td>${p.puntos || 0}</td>
+</tr>
+`
+
+tabla.innerHTML += fila
+
+})
+
+})
+
+}
+
+function calcular(){
+
+fetch("/calcular")
+.then(()=>cargar())
+
+}
+
+cargar()</script>
+
+</body>
+</html>

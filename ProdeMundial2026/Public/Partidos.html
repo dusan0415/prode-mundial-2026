@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Cargar partidos</title>
+</head>
+
+<body>
+
+    <h1>Cargar partido</h1>
+
+    <input id="fase" placeholder="Fase">
+    <input id="local" placeholder="Equipo local">
+    <input id="visitante" placeholder="Equipo visitante">
+
+    <button onclick="guardar()">Guardar partido</button>
+
+    <script>function guardar(){
+
+fetch("/partidos",{
+
+method:"POST",
+headers:{
+"Content-Type":"application/json"
+},
+
+body:JSON.stringify({
+
+fase:document.getElementById("fase").value,
+equipo_local:document.getElementById("local").value,
+equipo_visitante:document.getElementById("visitante").value
+
+})
+
+})
+
+}</script>
+
+</body>
+</html>

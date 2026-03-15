@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Pronósticos</title>
+</head>
+
+<body>
+
+    <h1>Cargar Pronóstico</h1>
+
+    <select id="participante"></select>
+    <select id="partido"></select>
+
+    <select id="pronostico">
+        <option value="local">Local</option>
+        <option value="empate">Empate</option>
+        <option value="visitante">Visitante</option>
+    </select>
+
+    <button onclick="guardar()">Guardar</button>
+
+    <script>
+
+        function cargarParticipantes() {
+
+            fetch("/participantes")
+                .then(r => r.json())
+                .then(data => {
+
+                    let select = document.getElementById("participante")
+
+                    data.forEach(p => {
+
+                        let option = document.createElement("option")
+                        option.value = p.id
+                        option.text = p.nombre + " " + p.apellido
+
+                        select.appendChild(option)
+
+                    })
+
+                })
+
+        }
+
+        function cargarPartidos() {
+
+            fetch("/partidos")
+                .then(r => r.json())
+                .then(data => {
+
+                    let select = document.getElementById("partido")
+
+                    data.forEach(p => {
+
+                        let option = document.createElement("option")
+                        option.value = p.id
+                        option.text = p.equipo_local + " vs " + p.equipo_visitante
+
+                        select.appendChild(option)
+
+                    })
+
+                })
+
+        }
+
+        function guardar() {
+
+            fetch("/pronostico", {
+
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify({
+
+                    participante_id: document.getElementById("participante").value,
+                    partido_id: document.getElementById("partido").value,
+                    pronostico: document.getElementById("pronostico").value
+
+                })
+
+            })
+
+        }
+
+        cargarParticipantes()
+        cargarPartidos()
+
+    </script>
+
+</body>
+</html>
