@@ -1,19 +1,18 @@
 {
-  "name": "prodemundial2026",
+  "name": "prode-mundial-2026",
   "version": "1.0.0",
-  "description": "",
-  "main": "app.js",
+  "description": "Sistema de prode del mundial",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node server.js"
   },
-  "keywords": [],
-  "author": "",
+  "author": "dusan0415",
   "license": "ISC",
-  "type": "commonjs",
-  "devDependencies": {
-    "eslint": "^10.0.3"
-  },
   "dependencies": {
+    "express": "^4.18.2",
+    "sqlite3": "^5.1.6",
+    "cors": "^2.8.5",
+    "body-parser": "^1.20.2",
     "multer": "^2.1.1",
     "xlsx": "^0.18.5"
   }
